@@ -2,8 +2,8 @@ let input = document.getElementById('search-input');
 let click = document.getElementById('search-button');
 let pokeName = document.getElementById('pokemon-name');
 let pokeId = document.getElementById('pokemon-id');
-let weight = document.getElementById('weight');
-let height = document.getElementById('height');
+let pokeWeight = document.getElementById('weight');
+let pokeHeight = document.getElementById('height');
 let type = document.getElementById('types');
 
 let hp = document.getElementById('hp');
@@ -36,6 +36,8 @@ async function getData(a) {
       const json = await response.json();
       console.log(json);
      statMaster(json)
+     typeMaster(json)
+     hwMaster(json)
      // console.log(json.headers)
       
     } catch (error) {
@@ -52,10 +54,10 @@ async function getData(a) {
     ["special-defense", document.getElementById('special-defense')],
     ["speed", document.getElementById('speed')]
   ]
-  
+  let i = 0;
   const temp = (a) => {    
     const { stats } = a;
-    let i = 0;
+    
     while(i < stats.length) {
       const out = stats[i];
       const { base_stat } = out;
@@ -66,7 +68,35 @@ async function getData(a) {
     
   }
   temp(a)
+  //Name and Id
   const { name } = a;
-  pokeName.innerHTML = `Name: ${name}`
-  //console.log(test)
+  const { id } = a;
+  pokeName.innerHTML = `Name: ${name} #${id}`
+ }
+
+ function typeMaster(a) {
+  const { types } = a;
+  let i = 0;
+  let output = [];
+ // console.log(name)
+  while(types.length > i) {
+   const out = types[i]
+   const { type } = out;
+   const { name } = type;
+   //console.log(name)
+   output.push(name)
+   i++
+  }
+  type.innerHTML = `Types: ${output}`
+ }
+ function hwMaster(a) {
+ const { height } = a;
+ const { weight } = a
+ const { sprites } = a;
+ const { front_default } = sprites;
+ pokeHeight.innerHTML = `Height: ${height}`
+ pokeWeight.innerHTML = `Weight: ${weight}`
+ let img = document.createElement('img');
+ img.src = front_default;
+ document.getElementById('id').appendChild(img);
  }
