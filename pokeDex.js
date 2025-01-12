@@ -24,9 +24,10 @@ class Pokemon {
 }
 //click.addEventListener(click, getData(input))
 async function getData(a) {
-  console.log(a)
+  //console.log(a.value)
+  let b = a.value;
     try {
-      const response = await fetch(poke(70));
+      const response = await fetch(poke(b));
       console.log(response.status)
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
@@ -51,20 +52,21 @@ async function getData(a) {
     ["special-defense", document.getElementById('special-defense')],
     ["speed", document.getElementById('speed')]
   ]
-  const { name } = a;
-  const test = name;
-  pokeName.innerHTML = `Name: ${name}`
+  
   const temp = (a) => {    
     const { stats } = a;
     let i = 0;
     while(i < stats.length) {
       const out = stats[i];
       const { base_stat } = out;
-      console.log(base_stat)
+      //console.log(base_stat)
       statSpread[i][1].innerHTML = `${statSpread[i][0]}: ${base_stat}`
       i++
     }
     
   }
   temp(a)
+  const { name } = a;
+  pokeName.innerHTML = `Name: ${name}`
+  //console.log(test)
  }
