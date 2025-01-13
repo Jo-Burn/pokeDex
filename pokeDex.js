@@ -22,14 +22,32 @@ class Pokemon {
     this.name = poke(name);
  }
 }
-//click.addEventListener(click, getData(input))
+function string(a) {
+// console.log(`work`)
+let b = a.value;
+let toString = /^[A-Za-z]\D+$/;
+ if(toString.test(b)) {
+  //console.log(b)
+  let c = b.toLowerCase();
+  console.log(c)
+  return getData(c)
+ } else {
+  console.log(`try again`)
+  return getData(b)
+ }
+  
+}
+
+//gets Data for api 
 async function getData(a) {
   //console.log(a.value)
-  let b = a.value;
     try {
-      const response = await fetch(poke(b));
+      const response = await fetch(poke(a));
       console.log(response.status)
       if (!response.ok) {
+        if(response.status == 404) {
+          window.alert(`Please Enter a Valid Pokemon name or ID`)
+        }
         throw new Error(`Response status: ${response.status}`);
       }
       
@@ -42,7 +60,7 @@ async function getData(a) {
       
     } catch (error) {
       console.error(error.message);
-    } 
+    }
   }
  // getData()
  function statMaster(a) {
@@ -90,13 +108,14 @@ async function getData(a) {
   type.innerHTML = `Types: ${output}`
  }
  function hwMaster(a) {
+ let img = []
  const { height } = a;
  const { weight } = a
  const { sprites } = a;
  const { front_default } = sprites;
  pokeHeight.innerHTML = `Height: ${height}`
  pokeWeight.innerHTML = `Weight: ${weight}`
- let img = document.createElement('img');
+ img = document.createElement('img');
  img.src = front_default;
  document.getElementById('id').appendChild(img);
  }
