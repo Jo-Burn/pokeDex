@@ -16,7 +16,7 @@ const poke = (b)=> {
     let c = `https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/${b}/`
     return c
 }
-//click.onclick = function() {getData(32)};
+click.addEventListener('click', clear())
 class Pokemon {
  constructor(name) {
     this.name = poke(name);
@@ -38,7 +38,7 @@ let toString = /^[A-Za-z]\D+$/;
   
 }
 
-//gets Data for api 
+//gets Data form api 
 async function getData(a) {
   //console.log(a.value)
     try {
@@ -97,15 +97,17 @@ async function getData(a) {
   let i = 0;
   let output = [];
  // console.log(name)
-  while(types.length > i) {
+  /* while(types.length > i) {
    const out = types[i]
    const { type } = out;
    const { name } = type;
    //console.log(name)
-   output.push(name)
+   //output.push(name)
+   types.innerHTML = `<span>${name.toUpperCase}</span>`
    i++
   }
-  type.innerHTML = `Types: ${output}`
+  //type.innerHTML = `Types: ${output}` */
+  type.innerHTML = types.map(type => `<span>${type.type.name.toUpperCase()}</span>`).join("");
  }
  function hwMaster(a) {
  let img = []
@@ -119,3 +121,6 @@ async function getData(a) {
  img.src = front_default;
  document.getElementById('id').appendChild(img);
  }
+ function clear() {
+  type.innerHTML = ``;
+}
