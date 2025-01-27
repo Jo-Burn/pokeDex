@@ -94,8 +94,8 @@ async function getData(a) {
 
  function typeMaster(a) {
   const { types } = a;
-  let i = 0;
-  let output = [];
+//  let i = 0;
+ // let output = [];
  // console.log(name)
   /* while(types.length > i) {
    const out = types[i]
@@ -107,7 +107,7 @@ async function getData(a) {
    i++
   }
   //type.innerHTML = `Types: ${output}` */
-  type.innerHTML = types.map(type => `<span>${type.type.name.toUpperCase()}</span>`).join("");
+  type.innerHTML = types.map(type => `<span>${type.type.name.toUpperCase()}</span>`);
  }
  function hwMaster(a) {
  let img = []
